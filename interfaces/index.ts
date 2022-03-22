@@ -1,0 +1,1 @@
+export { ICharacter } from './character'

@@ -1,9 +1,17 @@
+:root {
+  --color-black: #171c20;
+  --color-black-primary: #22272b;
+  --color-green: #567842;
+  --color-text: #bfbfbf;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background: var(--color-black);
+  color: var(--color-text);
+  font-family: 'Roboto', 'Open Sans', helvetica, arial, sans-serif;
 }
 
 a {
@@ -13,4 +21,16 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+main {
+  max-width: 1280px;
+  width: 100%;
+}
+
+#__next {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
 }
