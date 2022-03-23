@@ -9,7 +9,7 @@ export const ListEpisode: FC<IListEpisodeProps> = ({ episode }) => {
   return (
     <ul className={styles.list}>
       {arrNumEpisode.map((number) => (
-        <li key={number}>
+        <li className={styles.item} key={number}>
           <Link href={`/episodes/${number}`}>
             <a>{number}</a>
           </Link>

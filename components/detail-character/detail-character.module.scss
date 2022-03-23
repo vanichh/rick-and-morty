@@ -1,0 +1,15 @@
+.conteiner {
+  display: grid;
+  grid-template-columns: 300px minmax(auto, 600px);
+  grid-template-rows: auto auto;
+  height: fit-content;
+}
+.title {
+  grid-column: 2 span;
+}
+.title-episode {
+  font-size: 26px;
+  margin: 10px 0;
+  margin-top: 0;
+  font-weight: normal;
+}

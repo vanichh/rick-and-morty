@@ -6,7 +6,7 @@ import { FC } from 'react';
 import { statusTranslite, genderTranslite } from 'utils/translate';
 
 export const CartCharacter: FC<ICharacterProps> = (props) => {
-  const { name, image, gender, location, status, id } = props;
+  const { name, image, gender, location, species, status, id } = props;
 
   return (
     <aside className={styles.item}>
@@ -35,6 +35,7 @@ export const CartCharacter: FC<ICharacterProps> = (props) => {
             </a>
           </li>
           <li>Пол: {genderTranslite(gender)}</li>
+          <li>Вид: {species}</li>
         </ul>
       </div>
     </aside>
