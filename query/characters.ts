@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const GET_CHARACTERS = gql`
-  query {
-    characters(page: 1) {
+  query GetCharact($page: Int) {
+    characters(page: $page) {
       results {
         name
         image
@@ -10,9 +10,6 @@ export const GET_CHARACTERS = gql`
         status
         id
         species
-        episode {
-          name
-        }
         location {
           name
         }
@@ -20,3 +17,21 @@ export const GET_CHARACTERS = gql`
     }
   }
 `;
+
+export const GET_INIT_CHARACTERS = {
+  query: `{
+  characters(page: 1) {
+    results {
+      name
+      image
+      gender
+      status
+      id
+      species
+      location {
+        name
+      }
+    }
+  }
+}`,
+};
