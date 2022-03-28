@@ -9,7 +9,8 @@ import { GET_CHARACTERS, GET_INIT_CHARACTERS } from 'query/characters';
 import { IQueryChaster } from 'interfaces/query-chaster';
 import { ListCharacters } from 'components/list-characters';
 import { useSelector } from 'store/hooks';
-import { throttleEndPageCheck } from 'hooks/use-scroll';
+import { throttleEndPageCheck } from 'utils/helps';
+import { useScroll } from 'hooks/use-scroll';
 interface IHomeProps {
   results: ICharacter[];
   children?: ReactNode;
@@ -23,10 +24,9 @@ const Home: NextPage<IHomeProps> = ({ results }) => {
     variables: { id: counterPage },
   });
 
-  useEffect(() => {
-    window.addEventListener('scroll', throttleEndPageCheck);
-    return () => window.removeEventListener('scroll', throttleEndPageCheck);
-  }, []);
+  useScroll();
+
+  useEffect(() => {}, []);
 
   return (
     <section className={styles.list}>
