@@ -1,20 +1,15 @@
 import { useState } from 'react';
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useQuery } from '@apollo/client';
-import { IQueryChaster } from 'interfaces/query-chaster';
-import { GET_CHARACTERS } from 'query/characters';
-import { useEffect } from 'react';
-import { getCharast } from 'store/actions/charast';
 import { useDispatch, useSelector } from 'store/hooks';
 import { throttle } from 'utils/optimization';
 const height = 200;
 
+
 export const useScroll = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [state, setState] = useState<string>();
   const { isLoding } = useSelector((store) => store.character);
-  console.log(2)
-  const endPageCheck = (): void => {
+  console.log(2);
     if (!isLoding) {
       const heightPage = document.documentElement.clientHeight;
       const MaxFullHeightPage = Math.max(
@@ -27,16 +22,11 @@ export const useScroll = () => {
       );
       const scrollPage = MaxFullHeightPage - heightPage - window.pageYOffset;
       if (scrollPage < height) {
-        dispatch(getCharast());
-        console.log(1)
+        // dispatch(getCharast());
+        console.log(1);
       }
     }
-  };
 
-  const throttleEndPageCheck = throttle(endPageCheck, 250);
-
-  useEffect(() => {
-    window.addEventListener('scroll', throttleEndPageCheck);
-    return () => window.removeEventListener('scroll', throttleEndPageCheck);
-  }, []);
 };
+
+export const trotleUseScroll = throttle(useScroll, 250)

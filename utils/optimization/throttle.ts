@@ -1,5 +1,7 @@
+type TTimeout = ReturnType<typeof setTimeout>;
+
 export const throttle = (fun: Function, timeout: number) => {
-  let timer: ReturnType<typeof setTimeout> | null = null;
+  let timer: TTimeout | null = null;
   return (...args: any[]) => {
     if (timer) return;
     timer = setTimeout(() => {

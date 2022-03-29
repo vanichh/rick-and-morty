@@ -18,9 +18,9 @@ export const GET_CHARACTERS = gql`
   }
 `;
 
-export const GET_INIT_CHARACTERS = {
+export const GET_INIT_CHARACTERS = (id: number) => ({
   query: `{
-  characters(page: 1) {
+  characters(page: ${id}) {
     results {
       name
       image
@@ -34,4 +34,4 @@ export const GET_INIT_CHARACTERS = {
     }
   }
 }`,
-};
+});
