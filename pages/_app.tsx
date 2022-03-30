@@ -5,6 +5,7 @@ import { Footer } from 'components/footer/footer';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { Provider } from 'react-redux';
 import { initStore } from 'store/store';
+import { FC } from 'react';
 
 const client = new ApolloClient({
   uri: 'https://rickandmortyapi.com/graphql',
@@ -13,7 +14,7 @@ const client = new ApolloClient({
 
 const store = initStore();
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <ApolloProvider client={client}>
       <Header />
@@ -25,6 +26,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Footer />
     </ApolloProvider>
   );
-}
+};
 
 export default MyApp;

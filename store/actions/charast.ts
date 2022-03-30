@@ -16,6 +16,5 @@ export const getCharast: TThunks = () => async (dispatch, getState) => {
     body: GET_INIT_CHARACTERS(counterPage),
   });
   const { data } = await checkResponse(response);
-  console.log(data);
   dispatch(setCharast(data.characters.results));
 };

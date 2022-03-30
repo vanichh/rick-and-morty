@@ -1,32 +1,22 @@
-import { useState } from 'react';
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useDispatch, useSelector } from 'store/hooks';
-import { throttle } from 'utils/optimization';
-const height = 200;
+import { useDispatch } from 'store/hooks';
 
+export const useScroll = (func: Function, heightLoding = 150): (() => void) => {
+  let flag = true;
+  const dispatch = useDispatch();
 
-export const useScroll = () => {
-  // const dispatch = useDispatch();
-  const [state, setState] = useState<string>();
-  const { isLoding } = useSelector((store) => store.character);
-  console.log(2);
-    if (!isLoding) {
+  const scroll = () => {
+    if (flag) {
       const heightPage = document.documentElement.clientHeight;
-      const MaxFullHeightPage = Math.max(
-        document.body.scrollHeight,
-        document.documentElement.scrollHeight,
-        document.body.offsetHeight,
-        document.documentElement.offsetHeight,
-        document.body.clientHeight,
-        document.documentElement.clientHeight
-      );
+      const MaxFullHeightPage = document.documentElement.scrollHeight;
       const scrollPage = MaxFullHeightPage - heightPage - window.pageYOffset;
-      if (scrollPage < height) {
-        // dispatch(getCharast());
-        console.log(1);
+      if (scrollPage < heightLoding) {
+        flag = false;
+        dispatch(func());
+        setTimeout(() => {
+          flag = true;
+        }, 3000);
       }
     }
-
+  };
+  return scroll;
 };
-
-export const trotleUseScroll = throttle(useScroll, 250)

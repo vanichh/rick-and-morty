@@ -11,12 +11,14 @@ interface IInitState {
   counterPage: number;
   characters: ICharacter[];
   isLoding: boolean;
+  error: string;
 }
 
 const InitState = {
-  counterPage: 2,
+  counterPage: 1,
   characters: [] as ICharacter[],
   isLoding: false,
+  error: '',
 };
 
 export const charactReducer: Reducer<IInitState, TCharastActions> = (

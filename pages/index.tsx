@@ -1,76 +1,54 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import type { NextPage } from 'next';
 import styles from '../styles/Home.module.css';
 import { ICharacter } from 'interfaces';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { URL_API_GRAPHQL } from 'utils/constants/api';
 import Head from 'next/head';
 import { ListCharacters } from 'components/list-characters';
 import { useSelector, useDispatch } from 'store/hooks';
 import { throttle } from 'utils/optimization';
-import { getCharast } from 'store/actions/charast';
 import { GET_INIT_CHARACTERS } from 'query/characters';
+import { setCharast } from 'store/actions-type/charast';
+import { useScroll } from 'hooks/use-scroll';
+import { LoadingAnimation } from 'components/loading-animation';
+import { request, checkResponse } from 'utils/api';
+import { getCharast } from 'store/actions/charast';
 interface IHomeProps {
   results: ICharacter[];
   children?: ReactNode;
 }
 
-const HEIGHT_LOADING = 200;
-let flag = true;
-
 const Home: NextPage<IHomeProps> = ({ results }) => {
   const dispatch = useDispatch();
-  const [listCharacter, SetlistCharacter] = useState(results);
+  const scrollElem = useScroll(getCharast);
+  const throttleScroll = throttle(scrollElem, 250);
   const { isLoding, characters } = useSelector((store) => store.character);
-  console.log(characters)
-  const scroll = () => {
-    if (flag) {
-      const heightPage = document.documentElement.clientHeight;
-      const MaxFullHeightPage = document.documentElement.scrollHeight;
-      const scrollPage = MaxFullHeightPage - heightPage - window.pageYOffset;
 
-      if (scrollPage < HEIGHT_LOADING) {
-        flag = false;
-        dispatch(getCharast());
-        setTimeout(() => {
-          flag = true;
-        }, 3000);
-      }
-    }
-  };
-
-  const throttleScroll = throttle(scroll, 250);
   useEffect(() => {
+    dispatch(setCharast(results));
     window.addEventListener('scroll', throttleScroll);
     return () => window.removeEventListener('scroll', throttleScroll);
   }, []);
-
-  // useEffect(() => {
-  //   if (characters.length !== 0) {
-  //     console.log('characters',characters)
-  //     SetlistCharacter(characters);
-  //   }
-  // }, [characters]);
 
   return (
     <section className={styles.list}>
       <Head>
         <title>Список всех персонажей</title>
       </Head>
-      <ListCharacters arrCharacter={listCharacter} />
+      <ListCharacters arrCharacter={characters} />
+      {isLoding && <LoadingAnimation />}
     </section>
   );
 };
 
 export const getServerSideProps = async () => {
-  const response = await fetch(URL_API_GRAPHQL, {
+  const response = await request({
+    url: URL_API_GRAPHQL,
+    body: GET_INIT_CHARACTERS(1),
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(GET_INIT_CHARACTERS(1)),
   });
-
-  const { data } = await response.json();
+  const { data } = await checkResponse(response);
   return {
     props: {
       results: data.characters.results,
