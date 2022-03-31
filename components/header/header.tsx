@@ -1,8 +1,15 @@
-import { FC } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
 import styles from './header.module.scss';
-
+import { InputSearch, InputSubmit } from 'ui/input';
+import { Form } from 'components/form';
 
 export const Header: FC = () => {
+  const [state, setState] = useState('');
+
+  const onChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    setState(target.value);
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.wrapper}>
@@ -10,10 +17,14 @@ export const Header: FC = () => {
           Информация по вселеной{' '}
           <span className={styles['title--color']}>Rick and Morty</span>
         </h1>
-        <form className={styles.form}>
-          <input className={styles['form__input-search']} type='search' />
-          <input type='submit' />
-        </form>
+        <Form className={styles.form}>
+          <InputSearch
+            onChange={onChange}
+            className={styles['input-serch']}
+            value={state}
+          />
+          <InputSubmit className={styles['input-submit']} />
+        </Form>
       </div>
     </header>
   );

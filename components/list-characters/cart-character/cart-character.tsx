@@ -30,7 +30,7 @@ export const CartCharacter: FC<ICharacterProps> = (props) => {
           <li>Статус: {statusTranslite(status)}</li>
           <li>
             Локация:{' '}
-            <a className={styles['info-list__link']} href={location.name}>
+            <a className={styles['info-list__link']} href={`/location/${id}`}>
               {location.name}
             </a>
           </li>
