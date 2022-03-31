@@ -1,1 +1,1 @@
-export { detailCharacter } from './detail-character';
+export { DetailCharacter } from './detail-character';

@@ -4,6 +4,7 @@ import { GetServerSideProps, NextPage } from 'next/types';
 import { ReactNode } from 'react';
 import { ListEpisode } from 'components/list-episode';
 import Image from 'next/image';
+import { DetailCharacter } from 'components/detail-character';
 
 interface IcharacterInfoProps {
   infoСharacter: ICharacter;
@@ -11,18 +12,7 @@ interface IcharacterInfoProps {
 }
 
 const characterInfo: NextPage<IcharacterInfoProps> = ({ infoСharacter }) => {
-  const { episode, gender, image, location, species, status, name } =
-    infoСharacter;
-  console.log(infoСharacter);
-  return (
-    <section>
-      <div style={{width: 200}}><Image src={image}  alt={name} width={300}  height={300} /></div>
-      <h2>{name}</h2>
-      <p>Локация: {location.name}</p>
-      <p>Вид: {species}</p>
-      <ListEpisode episode={episode} />
-    </section>
-  );
+  return <DetailCharacter infoСharacter={infoСharacter} />;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
