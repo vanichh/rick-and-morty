@@ -2,6 +2,7 @@ import { ChangeEvent, FC, useState } from 'react';
 import styles from './header.module.scss';
 import { InputSearch, InputSubmit } from 'ui/input';
 import { Form } from 'components/form';
+import { useRouter } from 'next/router';
 
 export const Header: FC = () => {
   const [state, setState] = useState('');
@@ -9,6 +10,9 @@ export const Header: FC = () => {
   const onChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setState(target.value);
   };
+
+  const test = useRouter()
+  console.log(test)
 
   return (
     <header className={styles.header}>
@@ -23,7 +27,7 @@ export const Header: FC = () => {
             className={styles['input-serch']}
             value={state}
           />
-          <InputSubmit className={styles['input-submit']} />
+          <InputSubmit value='Поиск' className={styles['input-submit']} />
         </Form>
       </div>
     </header>

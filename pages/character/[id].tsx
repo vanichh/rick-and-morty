@@ -1,10 +1,8 @@
-import { URL_API_CHARACTER } from 'utils/constants/api';
-import { ICharacter } from 'interfaces/character';
-import { GetServerSideProps, NextPage } from 'next/types';
-import { ReactNode } from 'react';
-import { ListEpisode } from 'components/list-episode';
-import Image from 'next/image';
-import { DetailCharacter } from 'components/detail-character';
+import { URL_API_CHARACTER } from "utils/constants/api";
+import { ICharacter } from "interfaces/character";
+import { GetServerSideProps, NextPage } from "next/types";
+import { ReactNode } from "react";
+import { DetailCharacter } from "components/detail-character";
 
 interface IcharacterInfoProps {
   infoСharacter: ICharacter;
@@ -15,8 +13,7 @@ const characterInfo: NextPage<IcharacterInfoProps> = ({ infoСharacter }) => {
   return <DetailCharacter infoСharacter={infoСharacter} />;
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { query } = context;
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const response = await fetch(`${URL_API_CHARACTER}/${query.id}`);
   const infoСharacter = await response.json();
 

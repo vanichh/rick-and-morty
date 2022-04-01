@@ -1,6 +1,8 @@
+import { FC } from 'react';
 import styles from './footer.module.scss';
+import { IFooterProps } from './footer.props';
 
-export const Footer = () => {
+export const Footer: FC<IFooterProps> = () => {
   return (
     <footer className={styles.footer}>
       <p>
