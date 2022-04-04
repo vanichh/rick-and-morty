@@ -1,6 +1,5 @@
-import { NextPage } from "next"
+import { NextPage } from "next";
 
-export const Locations:NextPage = () => {
-  return (<section>
-  </section>)
-}
+export const Locations: NextPage = () => {
+  return <section></section>;
+};

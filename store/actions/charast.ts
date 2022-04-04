@@ -1,7 +1,7 @@
 import { TThunks } from './../types/thunks';
 import { request, checkResponse } from 'utils/api';
 import { URL_API_GRAPHQL } from 'utils/constants/api';
-import { GET_INIT_CHARACTERS } from 'query/characters';
+import { GET_INIT_CHARACTERS } from 'utils/query/characters';
 import { startLoding } from 'store/actions-type/charast';
 import { setCharast } from 'store/actions-type/charast';
 

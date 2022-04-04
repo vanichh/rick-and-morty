@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 300px minmax(auto, 600px);
   grid-template-rows: auto auto;
-  height: fit-content;
+  padding: 20px;
 }
 .title {
   grid-column: 2 span;

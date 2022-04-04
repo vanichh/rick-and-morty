@@ -19,7 +19,7 @@
   column-gap: 10px;
   flex-wrap: wrap;
   width: 400px;
-  border: 1px solid var(--border-color);
+  box-shadow: inset 0 0 0 1px var(--border-color);
   &__img {
     border-radius: 15px;
   }

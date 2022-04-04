@@ -23,11 +23,9 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
         showOnShallow={true}
       />
       <Header />
-      <main>
         <Provider store={store}>
           <Component {...pageProps} />
         </Provider>
-      </main>
       <Footer />
     </ApolloProvider>
   );
