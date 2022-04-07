@@ -1,8 +1,4 @@
-import {
-  INIT_CHARASTERS,
-  START_LODING_CHARASTERS,
-  SET_CHARASTERS,
-} from 'store/constants';
+import { START_LODING_CHARASTERS, SET_CHARASTERS } from 'store/constants';
 import { ICharacter } from 'interfaces/character';
 import { TCharastActions } from 'store/types/actions/charast';
 

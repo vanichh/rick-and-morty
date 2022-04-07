@@ -1,11 +1,11 @@
-import { URL_API_CHARACTER } from "utils/constants/api";
-import { ICharacter } from "interfaces/character";
-import { GetServerSideProps, NextPage } from "next/types";
-import { ReactNode } from "react";
-import { DetailCharacter } from "components/detail-character";
-import { Main } from "layout/main";
-import axios from "axios";
-import styles from './character.module.scss'
+import { URL_API_CHARACTER } from 'utils/constants/api';
+import { ICharacter } from 'interfaces/character';
+import { GetServerSideProps, NextPage } from 'next/types';
+import { ReactNode } from 'react';
+import { DetailCharacter } from 'components/detail-character';
+import { Main } from 'layout/main';
+import axios from 'axios';
+import styles from './character.module.scss';
 
 interface IcharacterInfoProps {
   infoСharacter: ICharacter;

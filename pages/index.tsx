@@ -1,17 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import type { NextPage } from "next";
-import styles from "../styles/Home.module.css";
-import { ICharacter } from "interfaces";
-import { ReactNode, useEffect } from "react";
-import Head from "next/head";
-import { ListCharacters } from "components/list-characters";
-import { useSelector, useDispatch } from "store/hooks";
-import { throttle } from "utils/optimization";
-import { setCharast } from "store/actions-type/charast";
-import { useScroll } from "hooks/use-scroll";
-import { LoadingAnimation } from "components/loading-animation";
-import { getCharast } from "store/actions/charast";
-import { Main } from "layout/main";
+import type { NextPage } from 'next';
+import styles from '../styles/Home.module.css';
+import { ICharacter } from 'interfaces';
+import { ReactNode, useEffect } from 'react';
+import Head from 'next/head';
+import { ListCharacters } from 'components/list-characters';
+import { useSelector, useDispatch } from 'store/hooks';
+import { setCharast } from 'store/actions-type/charast';
+import { useScroll } from 'hooks/use-scroll';
+import { LoadingAnimation } from 'components/loading-animation';
+import { getCharast } from 'store/actions/charast';
+import { Main } from 'layout/main';
 interface IHomeProps {
   results: ICharacter[];
   children?: ReactNode;
@@ -19,14 +18,20 @@ interface IHomeProps {
 
 const Home: NextPage<IHomeProps> = ({ results }) => {
   const dispatch = useDispatch();
-  const throttleScroll = throttle(useScroll(getCharast), 250);
+  const { scroll, isLodingCroll, setIsLodingCroll } = useScroll(getCharast);
   const { isLoding, characters } = useSelector((store) => store.character);
 
   useEffect(() => {
     dispatch(setCharast(results));
-    window.addEventListener("scroll", throttleScroll);
-    return () => window.removeEventListener("scroll", throttleScroll);
+    window.addEventListener('scroll', scroll);
+    return () => window.removeEventListener('scroll', scroll);
   }, []);
+
+  useEffect(() => {
+    if (isLoding) {
+      setIsLodingCroll(true);
+    }
+  }, [isLoding]);
 
   return (
     <Main>
@@ -35,12 +40,12 @@ const Home: NextPage<IHomeProps> = ({ results }) => {
           <title>Список всех персонажей</title>
         </Head>
         <ListCharacters arrCharacter={characters} />
-        {!isLoding && <LoadingAnimation />}
+        {isLodingCroll && <LoadingAnimation />}
       </section>
     </Main>
   );
 };
 
-export { getServerSideProps } from "ssr/index-page";
+export { getServerSideProps } from 'ssr/index-page';
 
 export default Home;

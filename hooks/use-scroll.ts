@@ -1,22 +1,29 @@
 import { useDispatch } from 'store/hooks';
+import { Dispatch, useState } from 'react';
+import { throttle } from 'utils/optimization';
 
-export const useScroll = (func: Function, heightLoding = 150): (() => void) => {
-  let flag = true;
+type TreturnScroll = {
+  scroll: () => void;
+  isLodingCroll: boolean;
+  setIsLodingCroll: Dispatch<boolean>;
+};
+
+export const useScroll = (func: () => any, heightLoding = 150, time = 250): TreturnScroll => {
+  const [isLodingCroll, setIsLodingCroll] = useState(true);
   const dispatch = useDispatch();
 
   const scroll = () => {
-    if (flag) {
+    if (isLodingCroll) {
+      console.log(1);
       const heightPage = document.documentElement.clientHeight;
       const MaxFullHeightPage = document.documentElement.scrollHeight;
       const scrollPage = MaxFullHeightPage - heightPage - window.pageYOffset;
       if (scrollPage < heightLoding) {
-        flag = false;
+        setIsLodingCroll(false);
         dispatch(func());
-        setTimeout(() => {
-          flag = true;
-        }, 3000);
       }
     }
   };
-  return scroll;
+
+  return { scroll: throttle(scroll, time), isLodingCroll, setIsLodingCroll };
 };

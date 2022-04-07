@@ -18,6 +18,7 @@ export const request = (params: IRequest): Promise<Response> => {
     referrerPolicy: "no-referrer",
     headers: requestHeaders,
   };
+  
 
   if (params.body) {
     sitingFetch.body = JSON.stringify(params.body);
